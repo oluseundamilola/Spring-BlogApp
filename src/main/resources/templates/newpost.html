@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Varela+Round&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Blog :: New Post</title>
+	<link rel="stylesheet" th:href="@{/css/newpost.css}" />
+</head>
+
+<body>
+	
+
+	<div class="write">
+		<div class="writeTopic">
+			<h1>Write a new post</h1>
+		</div>
+		<form action="#" method="post" th:action="@{'/posts/new'}" th:object="${post}" class="writeForm">
+			<input type="hidden" th:field="*{createdAt}" />
+			<input type="hidden" th:field="*{account}" />
+			<div class="writeFormGroup">
+				<input th:field="*{title}" type="text" placeholder="title" autofocus={true} class="writeInput" />
+
+				<select th:field="*{tag}" class="tag">
+					<option value="technology">technology</option>
+					<option value="entertainment">entertainment</option>
+					<option value="politics">politics</option>
+					<option value="sports">sports</option>
+					<option value="fashion">fashion</option>
+					<option value="lifestyle">lifestyle</option>
+				</select>
+
+			</div>
+			<div class="writeFormGroup">
+				<textarea th:field="*{body}" placeholder="Tell your story..." class="writeInput writeText"></textarea>
+			</div>
+			<button class="writeSubmit">Publish</button>
+		</form>
+	</div>
+
+
+
+
+</body>
+
+</html>

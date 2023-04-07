@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Varela+Round&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Blog::Home</title>
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
+	</head>
+	
+	<body>
+		<div class="login">
+			<span class="loginTitle">Login</span>
+			<form action="#" th:action="@{/login}" method="post" class="loginForm">
+				<label>Email</label>
+				<input class="loginInputs" name="email" type="text" placeholder="Enter your email..."/>
+				<label>Password</label>
+				<input class="loginInputs" name="password" type="password" placeholder="Enter your password..."/>
+				<button type="sumit" class="loginButton">Login</button>
+			</form>
+			<a th:href="@{'/register'}"><button class="registerButton">Register</button></a>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="utf-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Lora:ital,wght@1,400;1,500;1,600;1,700&family=Varela+Round&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Blog::Home</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+	<div class="top">
+		<div class="topLeft">
+			<i class="topIcon fa-brands fa-square-facebook"></i>
+			<i class="topIcon fa-brands fa-square-twitter"></i>
+			<i class="topIcon fa-brands fa-square-pinterest"></i>
+			<i class="topIcon fa-brands fa-square-instagram"></i>
+		</div>
+		<div class="topCenter">
+			<ul class="topList">
+				<a th:href="@{ '/'}">
+					<li class="topListItem">HOME</li>
+				</a>
+				<li class="topListItem">ABOUT</li>
+				<a th:href="@{'/posts/new'}">
+					<li class="topListItem">WRITE</li>
+				</a>
+				<div class="line" sec:authorize="isAuthenticated()">
+					<li class="topListItem"> <a th:href="@{'/users/'+${account.id}+'/posts'}">MY POSTS</a></li>
+					<form action="#" th:action="@{/logout}" method="POST">
+						<a th:href="@{/logout}">
+							<button class="logoutButton" type="submit">SIGN-OUT</button>
+						</a>
+					</form>
+				</div>
+				<div class="line" sec:authorize="!isAuthenticated()">
+					<li class="topListItem"><a th:href="@{/register}">REGISTER</a></li>
+				</div>
+
+			</ul>
+		</div>
+		<div class="topRight" sec:authorize="isAuthenticated()">
+			<form class="form" action="#" th:action="@{/logout}" method="POST">
+				<label>Hi, <span sec:authentication="name">Username</span></label>
+			</form>
+		</div>
+		<div class="topRight" sec:authorize="!isAuthenticated()">
+			<form class="form" action="#" th:action="@{/login}" method="POST">
+				<a th:href="@{/login}">Login</a>
+			</form>
+		</div>
+	</div>
+
+	<div class="header">
+		<div class="headerTitles">
+			<span class="headerTitlesm">Spring Boot</span>
+			<span class="headerTitleLg">Blog</span>
+		</div>
+		<img th:src="@{/images/header2.jpg}" class="headerImg" />
+	</div>
+
+	<div class="container">
+		<h4 class="headText">Posts</h4>
+		<div class="boxContainer">
+
+			<div class="box" th:each="post : ${posts}">
+				<div class="postImg">
+					<div class="black"></div>
+					<h1 class="tag" th:text="${post.tag}">Tag</h1>
+					<img th:src="@{'/images/' + ${post.tag} +'.jpg'}" class="imgPost" />
+				</div>
+				<div class="postContent">
+					<div class="theTopics">
+						<a th:href="@{ '/post/' + ${post.id} }">
+							<h1 class="postTopic" th:text="${post.title}">Topic</h1>
+						</a>
+						<span class="author" th:text="'Written by '+ ${post.account.firstName}">Written by</span>
+					</div>
+					<div class="time">
+						<span class="createdAt" th:text="'Pulished on ' +${post.createdAt}">Created at:</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+</html>
